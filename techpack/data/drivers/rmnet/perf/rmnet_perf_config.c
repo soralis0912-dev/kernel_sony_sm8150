@@ -373,7 +373,8 @@ rmnet_perf_dereg_callbacks(struct net_device *dev,
 
 static bool rmnet_perf_config_hook_registered(void)
 {
-	int (*deag_entry)(struct sk_buff *skb);
+	int (*deag_entry)(struct sk_buff *skb,
+			  struct rmnet_port *port);
 	void (*frag_entry)(struct rmnet_frag_descriptor *frag_desc,
 			   struct rmnet_port *port);
 
@@ -459,13 +460,13 @@ static struct notifier_block rmnet_perf_dev_notifier __read_mostly = {
 	.priority = 1,
 };
 
-int __init rmnet_perf_init(void)
+static int __init rmnet_perf_init(void)
 {
 	pr_info("%s(): initializing rmnet_perf\n", __func__);
 	return register_netdevice_notifier(&rmnet_perf_dev_notifier);
 }
 
-void __exit rmnet_perf_exit(void)
+static void __exit rmnet_perf_exit(void)
 {
 	pr_info("%s(): exiting rmnet_perf\n", __func__);
 	unregister_netdevice_notifier(&rmnet_perf_dev_notifier);
