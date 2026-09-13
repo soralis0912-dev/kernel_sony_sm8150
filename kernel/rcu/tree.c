@@ -3332,7 +3332,7 @@ static void kfree_rcu_work(struct work_struct *work)
 		if (cmpxchg(&krcp->bcached, NULL, bhead))
 			free_page((unsigned long) bhead);
 
-		cond_resched_rcu_qs();
+		cond_resched_tasks_rcu_qs();
 	}
 
 	/*
@@ -3344,7 +3344,7 @@ static void kfree_rcu_work(struct work_struct *work)
 		next = head->next;
 		debug_rcu_head_unqueue(head);
 		__rcu_reclaim(rcu_state_p->name, head);
-		cond_resched_rcu_qs();
+		cond_resched_tasks_rcu_qs();
 	}
 }
 
