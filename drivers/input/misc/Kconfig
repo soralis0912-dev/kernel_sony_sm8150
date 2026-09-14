@@ -399,6 +399,20 @@ config NFC_PN553_DEVICES
 
 	  You can say N here if you don't have any SPI connected to your computer.
 
+config NXP_P73_DEVICES
+	bool "Nxp P73 secure element protocol driver (SPI) devices"
+	depends on SPI && NFC_PN553_DEVICES
+	default n
+	---help---
+	  This enables the eSE (embedded Secure Element) driver for the NXP
+	  PN81T family, which exposes /dev/p73 to the SPI eSE HAL. It is
+	  required for FeliCa (Osaifu-Keitai) on the japanese models.
+
+	  It talks to the NFC controller through pn544_dev_ioctl() exported
+	  by the pn553 driver, so NFC_PN553_DEVICES has to be enabled too.
+
+	  If unsure, say N.
+
 config INPUT_WISTRON_BTNS
 	tristate "x86 Wistron laptop button interface"
 	depends on X86_32

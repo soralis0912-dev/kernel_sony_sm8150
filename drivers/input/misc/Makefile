@@ -93,3 +93,4 @@ obj-$(CONFIG_FLASH_LED)               += flash_led/
 obj-$(CONFIG_INPUT_TCS3490)               += tcs3490/
 obj-$(CONFIG_INPUT_POWERKEY_FORCECRASH)   += powerkey_forcecrash/
 obj-$(CONFIG_NFC_PN553_DEVICES)		+= pn553.o
+obj-$(CONFIG_NXP_P73_DEVICES)		+= p73.o
