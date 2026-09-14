@@ -30,7 +30,16 @@
 
 	/* SPI: QUP0 */
 	spi@880000 {
-		compatible = "qcom,spi-geni-cloned";
+		/*
+		 * Stock overrides the compatible with "qcom,spi-geni-cloned",
+		 * which the geni driver in this tree does not match - not
+		 * something the upstream merge dropped, it has never been
+		 * here.  The controller then never binds, so no SPI master is
+		 * created and the p61 child below is never registered, which
+		 * is what /dev/p73 is made from.  Nothing else uses SE0, so
+		 * there is nothing to clone it away from; leave the base
+		 * compatible alone.
+		 */
 		pinctrl-0 = <&sm_gpio_0 &sm_gpio_1 &sm_gpio_2>;
 		pinctrl-1 = <&sm_gpio_0_sleep &sm_gpio_1 &sm_gpio_2>;
 		nxp,ese-pwr = <&tlmm 42 0x00>;

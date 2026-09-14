@@ -11,7 +11,18 @@
  */
 
 #include "sm8150-kumano-bahamut_common.dtsi"
-#include "somc-kumano-nfc_pn557.dtsi"
+/*
+ * The japanese models carry a PN81T, which is a PN557 with the P73 secure
+ * element on the same package, and that is what Osaifu-Keitai talks to.  One
+ * build serves every variant while the bootloader can only tell them apart by
+ * qcom,board-id, which is <8 0> on all of them, so the overlay it picks is
+ * always this one - the japanese ones never get a chance to match.  Describe
+ * the secure element here instead.  The NFC node itself is identical in both
+ * files; the only difference is the SPI bus below it.  On a handset that has
+ * no P73 the bus is simply never opened: the secure element HAL is started
+ * only when the LTA label names a japanese model.
+ */
+#include "somc-kumano-nfc_pn81t.dtsi"
 
 &soc {
 };
