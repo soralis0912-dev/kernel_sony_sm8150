@@ -47,8 +47,6 @@ static int cam_jpeg_subdev_close(struct v4l2_subdev *sd,
 
 	cam_node_shutdown(node);
 
-	cam_req_mgr_rwsem_read_op(CAM_SUBDEV_UNLOCK);
-
 	return 0;
 }
 
